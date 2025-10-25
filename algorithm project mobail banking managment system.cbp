@@ -1,0 +1,284 @@
+#include <iostream>
+#include <string>
+using namespace std;
+string account_name = "UOG CS Students";
+string account_type = "Saving_ETB_4855";
+string my_phonenumber = "0986345234";
+string pin = "1234";
+double total_balance = 1500.0;
+
+bool isValidNumber(string number, string type) {
+  /*  substr is amember of fuction of std it is string class used to extract a substring from a string
+    syntax string.substr(start_index, length) */
+    if (type == "EthioTelecom" && number.substr(0, 2) == "09" && number.length() == 10) return true;
+    if (type == "Safaricom" && number.substr(0, 2) == "07" && number.length() == 10) return true;
+return false;
+}
+// Function to handle airtime purchase
+void buyAirtime(string type) {
+    string mobile_number;
+    double amount;
+    cout << "Enter mobile number: ";
+    cin >> mobile_number;
+    if (!isValidNumber(mobile_number, type)) {
+        cout << "Error: Invalid number for " << type << "\n";
+        return;
+        }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+        return;
+    }
+    total_balance -= amount;
+    cout << "dear customer your Airtime is purchased successful! Remaining balance: " << total_balance << "  thank you for using CBE \n";
+}
+// Function to transfer money to another CBE account
+void transferToCBE() {
+    string account_number;
+    double amount;
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 4) != "1000") {
+        cout << "Error: Invalid CBE account number!\n";
+        return;
+    }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+        return;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+
+    string confirm;
+cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<"\n";
+    cout << "Confirm transfer: yes/no"<<endl;
+
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+
+    }
+else if(confirm == "no") {
+        cout << "Transfer cancelled.\n";
+
+    }
+}
+
+
+void moreoptions(){}
+int main() {
+int choice;
+    double amount;
+    int account_number;
+    cout << "1. Login\n 2. Exit\n";
+    cin >> choice;
+
+  if (choice == 2) return 0;
+else if(choice == 1){
+    string entered_pin;
+    cout << "Please enter your pin to login: \n";
+    cin >> entered_pin;
+    if (entered_pin != pin) {
+        cout << "This is incorrect pin!\n";
+        return 0;
+    }
+    cout << "Welcome to CBE mobile banking\n";
+
+    while (true) {
+        cout << "1. My Account\n2. Airtime\n3. Transfer to CBE\n4. More Options\n5. Exit\n";
+        cin >> choice;
+        if (choice == 1) {
+ cout << "Account Type: " << account_type << "\nTotal Balance: " << total_balance << "\n";
+ } else if (choice == 2) {
+cout << "1. Buy EthioTelecom Airtime\n2. Buy Safaricom Airtime\n";
+    cin >> choice;
+if (choice == 1) buyAirtime("EthioTelecom");
+else if (choice == 2) buyAirtime("Safaricom");
+ } else if (choice == 3) {
+         transferToCBE();
+  }
+ else if(choice == 4){
+
+     moreoptions();
+cout<<"1.transfer to other Bank \n 2.transfer to Telebir wallet \n";
+   cin>> choice;
+if(choice == 1){
+cout<<"1.dashen Bank \n 2.Buna Bank \n 3.Amhara Bank \n 4. Hibret Bank \n 5. Abicinia Bank\n";
+   cin>> choice;
+if(choice == 1){
+            string account_number;
+
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 2) != "37") {
+        cout << "Error: Invalid Dashen bank account number!\n";
+        return 0;
+    }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+return 0;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+
+    string confirm;
+   cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<endl;
+    cout << "Confirm transfer: YES/no"<<endl;
+    cin >>confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance <<"thank you for using CBE \n";
+    } else if(confirm == "no") {
+        cout << "Transfer cancelled.\n";
+    }   }
+if(choice == 2){
+            string account_number;
+    double amount;
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 3) != "822") {
+        cout << "Error: Invalid buna bank account number!\n";
+        return 0; }
+cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+return 0;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+ string confirm;
+    cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<endl;
+    cout << "Confirm transfer: yes/no"<<endl;
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+    } else if(confirm == "no"){
+        cout << "Transfer cancelled.\n";
+    }
+    }
+   if(choice == 3){
+            string account_number;
+    double amount;
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 3) != "655") {
+        cout << "Error: Invalid Amhara bank account number!\n";
+        return 0;
+    }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+return 0;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+    string confirm;
+    cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<endl;
+    cout << "Confirm transfer: yes/no"<<endl;
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+    } else if(confirm == "no"){
+        cout << "Transfer cancelled.\n";
+    }
+    }
+    if(choice == 4){
+            string account_number;
+    double amount;
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 2) != "65") {
+        cout << "Error: Invalid Hibret bank account number!\n";
+        return 0;
+    }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+return 0;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+    string confirm;
+    cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<endl;
+    cout << "Confirm transfer: yes/no"<<endl;
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+    } else if(confirm == "no"){
+        cout << "Transfer cancelled.\n";
+    }
+    }
+      if(choice == 5){
+            string account_number;
+    double amount;
+    string reason;
+    cout << "Enter account number: ";
+    cin >> account_number;
+    if (account_number.substr(0, 3) != "211") {
+        cout << "Error: Invalid Abiciny bank account number!\n";
+        return 0;
+    }
+    cout << "Enter amount: ";
+    cin >> amount;
+    if (amount > total_balance) {
+        cout << "Error: Insufficient balance!\n";
+return 0;
+    }
+    cout << "Enter reason: ";
+    cin>>reason;
+    string confirm;
+    cout<<"you are transfering " <<amount<< " birr to "<<account_number<< " with reason of "<<reason<<endl;
+    cout << "Confirm transfer: yes/no"<<endl;
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+    } else if(confirm == "no"){
+        cout << "Transfer cancelled.\n";
+    }
+   }
+   }
+   else if(choice == 2){
+    cout<<"1. "<<account_type<<endl;
+    cin>>choice;
+    if(choice == 1){
+cout<<"Your mobile number is :\n"<<my_phonenumber<<endl;
+cout<<"Enter amount"<<endl;
+cin>>amount;
+string confirm;
+    cout << "Confirm transfer: yes/no"<<endl;
+    cin >> confirm;
+    if (confirm == "yes") {
+        total_balance -= amount;
+        cout << "Transfer successful! Remaining balance: " << total_balance << "thank you for using CBE \n";
+    } else if(confirm == "no"){
+        cout << "Transfer cancelled.\n";
+    }
+    }
+   }
+ }
+else if (choice == 5) {
+            break;
+        }
+    return 0;
+   }
+}
+}
+
